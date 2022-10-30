@@ -1,0 +1,35 @@
+.login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8rem;
+    text-align: center;/*since instagram logo is an inline element*/
+    flex-direction: row;
+}
+
+.login-card{
+    border: 1px solid #ccc;
+    width: 25rem;
+    height: 18rem;
+    padding: 1rem;
+}
+
+.bottom-card{
+    width: 25rem;
+    border: 1px solid #ccc;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.insta-mob-bg{
+    background-image: url("../../assets/insta-mob-bg.png");
+    width: 454px;
+    height: 618px;
+    position: relative;
+}
+
+.carousel{
+    position: absolute;
+    top: 6rem;
+    left: 9.2rem;
+}

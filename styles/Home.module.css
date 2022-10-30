@@ -1,6 +1,6 @@
-.container {
-  padding: 0 2rem;
-}
+/* .container {
+  padding: 0;
+} */
 
 .main {
   min-height: 100vh;
@@ -10,6 +10,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: white;
+  background-color: black;
 }
 
 .footer {
