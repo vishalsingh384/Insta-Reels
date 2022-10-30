@@ -38,13 +38,16 @@
     scrollbar-width: 0;
     overflow-y: scroll;
 }
-
+.video-container::-webkit-scrollbar{
+    display: none;
+}
 .post-container{
-    height: inherit;
+    height: 100%;
     width: 20rem;
     background-color: aquamarine;
     border-radius: inherit;
     margin-bottom: 0.5rem;
+    position: relative;
 }
 
 .post-container>video{
@@ -52,4 +55,31 @@
     width: inherit;
     border-radius: inherit;
     background-color: blueviolet;
+    
 }
+
+.video-info{
+    display: flex;
+    width: 100%;
+    position: absolute;
+    justify-content: space-around;
+    bottom: 10px;
+}
+
+.avatar-container{
+    display: flex;
+    justify-content: flex-start;
+    width: 70%;
+    align-items: center;
+    padding-left: 1rem;
+}
+.avatar-container>p{
+    padding-left: 1rem;
+}
+.post-like{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
