@@ -1,49 +1,46 @@
 import React, { useContext, useEffect } from 'react'
 import TextField from '@mui/material/TextField'
 import Image from 'next/image'
-import logo from '../../assets/Instagram.jpeg'
+import logo from '../assets/Instagram.jpeg'
 import Button from '@mui/material/Button'
 import { Carousel } from 'react-responsive-carousel'
-import bg1 from '../../assets/bg1.jpg'
-import bg2 from '../../assets/bg2.jpg'
-import bg3 from '../../assets/bg3.jpg'
-import bg4 from '../../assets/bg4.jpg'
-import bg5 from '../../assets/bg5.jpg'
-import { AuthContext } from '../../context/auth'
+import bg1 from '../assets/bg1.jpg'
+import bg2 from '../assets/bg2.jpg'
+import bg3 from '../assets/bg3.jpg'
+import bg4 from '../assets/bg4.jpg'
+import bg5 from '../assets/bg5.jpg'
+import { AuthContext } from '../context/auth'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-function index() {
+function forgot() {
   const[email,setEmail]=React.useState('');
-  const[password,setPassword]=React.useState('');
   const[error,setError]=React.useState('');
   const[loading,setLoading]=React.useState(false);
   const router=useRouter();
-  const {login,user}=useContext(AuthContext);
-
+  const {forgotPass,user}=useContext(AuthContext);
 
   useEffect(()=>{
     if(user){
       //route to feed page
-      console.log("routed");
       router.push("/");
     }
   },[user])
   
   let handleClick=async()=>{
     try{
-      await login(email,password);
-      setLoading(true);//ye true karne ka matlab ye hai ki ek baar click kar diya log in pe 
-      // to jab tak result nahi aa jata tab tak mai fir click nahi kar paaunga. Isse multiple faaltu calls nahi lagengi. Isliye jab sab ho jaaye to LAST me isko false kiya hai.
-      setError('');
-      console.log("logged in");
+        setLoading(true);//ye true karne ka matlab ye hai ki ek baar click kar diya log in pe 
+        // to jab tak result nahi aa jata tab tak mai fir click nahi kar paaunga. Isse multiple faaltu calls nahi lagengi. Isliye jab sab ho jaaye to LAST me isko false kiya hai.
+        setError('');
+        await forgotPass(email);
+        console.log("email sent");
     }
     catch(err){
-      console.log(JSON.stringify(err));
-      setError(err.code);
-      setTimeout(() => {
-        setError('');
-      }, 2000);
+        console.log(err);
+        setError(err.code);
+        setTimeout(() => {
+            setError('');
+        }, 2000);
     }
     setLoading(false);
   }
@@ -84,26 +81,16 @@ function index() {
                 onChange={(e)=>setEmail(e.target.value)}
                 />
 
-                <TextField id="outlined-basic" 
-                size="small" fullWidth 
-                margin="dense" 
-                label="Password" variant="outlined"
-                type="password" 
-                value={password}
-                onChange={(e)=>setPassword(e.target.value)}
-                />
-
                 <Button style={{marginTop:"0.8rem"}}
                 variant="contained" component="label" 
                 fullWidth size="small" onClick={handleClick}>
-                Sign In
+                Send Email
                 </Button>
 
                 {/* this mean if error is present then show error div */}
                 {error!=''&&
                 <div style={{color:"red"}}>{error}</div>
                 }
-                <div style={{color:"blue", marginTop:"0.5rem"}}><Link href='/forgot'>Forgot Password?</Link></div>
             </div>
             <div className='bottom-card'>Don't have an account? <Link href='/signup'><span style={{color:"purple"}}>Sign Up</span></Link></div>
         </div>
@@ -111,4 +98,6 @@ function index() {
   )
 }
 
-export default index
+export default forgot
+
+

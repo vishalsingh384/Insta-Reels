@@ -4,7 +4,7 @@ import Upload from './Upload'
 import Avatar from '@mui/material/Avatar';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-function feed() {
+function Feed() {
   return (
     <div className='feed-container'>
         <Navbar/>
@@ -37,4 +37,4 @@ function feed() {
   )
 }
 
-export default feed
+export default Feed

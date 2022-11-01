@@ -16,6 +16,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import HomeIcon from '@mui/icons-material/Home';
 import ExploreIcon from '@mui/icons-material/Explore';
+import { AuthContext } from '../../context/auth';
+import { useRouter } from 'next/router';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile','Logout'];
@@ -23,7 +25,8 @@ const settings = ['Profile','Logout'];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const{logout}=React.useContext(AuthContext);
+  const router=useRouter();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -38,6 +41,11 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogout=(async()=>{
+    await logout();
+    router.push('/login')
+  });
 
   return (
     <AppBar position="static" className='navbar'>
@@ -152,11 +160,15 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Profile</Typography>
+              </MenuItem>
+              <MenuItem  onClick={()=>{
+                handleLogout()
+                handleCloseUserMenu
+              }}>
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
